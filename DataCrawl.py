@@ -1,24 +1,19 @@
 import facebook as fb
 import pandas as pd
 import requests 
-token = 'EAAIiQjDErnwBAPmwu3raOZAFZCNY2ZCZCa7CCf8hkAzNjBy9qaDmC0ZCbigKrOdvmCQk0VlEVeiYzxUmhZC5NGqGqxAb4ZBAzIKAimUs42ZAtclZCnyio8HkpwEqwZBtMabRo4PPWJFxj2xgTPZCh2qmSL2d4WZCegUNqDSSZAkmi8YJPfZAzmJUbFGHb9XGhvv0NCkBOl6xzOZA2IsTfxAcuDKhvmxHkyN7i2h4rw20LOUJPQUexyAYllB5LsR' # your token
+
+token = '' # your token
 graph = fb.GraphAPI(access_token=token, version = 2.9)
 
 def getLikes(data):
-    for post in data['data']: #data['posts']['data'] is a list of posts
-        print(post)
-        if 'name' not in post:
-            tmp = ' '
-        else:
-            tmp = post['name']
+    for post in data['data']: 
         refined_data = {
-                        'id': post['id'],\
-                        'time': post['created_time'],\
-                        'name': tmp
+                        'Year': post['created_time'].split('-')[0],\
+                        'Name': post['name'] 
                         }
         data_list.append(refined_data)
     
-data = graph.get_object('me', fields='likes', limit=1000) #fields = 'posts' means that we only want to get the posts
+data = graph.get_object('me', fields='likes', limit=1000) 
 data_list = []
 dataa = data['likes']
 
@@ -30,6 +25,11 @@ while (True):
         break
 
 df = pd.DataFrame(data_list)
-print(df)
-df.to_csv('data.csv')
+num = df.groupby('Year').count()
+num_page = pd.DataFrame(columns=['Year', 'Number of Pages'])
+num_page['Year'] = num.index
+num_page['Number of Pages'] = num.values
+
+df.to_csv('page_liked.csv', index=False)
+num_page.to_csv('num_page.csv', index=False)
 
