@@ -1,5 +1,5 @@
 # Facebook_Data
-- This is a short code to crawl data from your Facebook account, you could not crawl from other accounts or pages due to Facebook GraphAPI rules.
+This is a short code to crawl data from your Facebook account, you could not crawl from other accounts or pages due to Facebook GraphAPI rules.
 ## Requirements 
 Install the libraries in requirements: 
 ```
