@@ -2,9 +2,9 @@
 - This is a short code to crawl data from your Facebook account, you could not crawl from other accounts or pages due to Facebook GraphAPI rules.
 ## Requirements 
 Install the libraries in requirements: 
-'''
+```
 pip install -r requirements.txt
-'''
+```
 ## Access to Facebook Developers
 Do the following steps:
 1. Access to http://developers.facebook.com/, create an account there.
